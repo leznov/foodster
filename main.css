@@ -1,0 +1,20 @@
+
+
+#product-table tr td{
+    border: solid 1px #ccc;
+    border-spacing: 0;
+}
+
+
+.delete-row{
+    cursor: pointer;
+    color: brown;
+}
+
+tr:hover{
+    background: rgb(243, 243, 243);
+}
+
+.row-color{
+    background: rgb(199, 255, 204);
+}
