@@ -1,4 +1,6 @@
 
+'use strict';
+
 drawTable(); // Draw all table using data from the LS
 
 // Adding event listeners
@@ -31,7 +33,7 @@ function validForm(e){
 function addToLS(productName,proteins){
 
     // Create an object
-    const product = {
+    let product = {
         id: 1,
         name: productName,
         proteins: proteins
@@ -41,7 +43,7 @@ function addToLS(productName,proteins){
     // If LS is empty
     if (localStorage.getItem('products') === null){
         // Init array
-        const products = [];
+        let products = [];
 
         // Add to array
         products.push(product);
@@ -55,7 +57,7 @@ function addToLS(productName,proteins){
     }else{
         /// If LS has products
         // Get products from the LS
-        const products = JSON.parse(localStorage.getItem('products'));
+        let products = JSON.parse(localStorage.getItem('products'));
 
 
         /// Set product ID
@@ -83,12 +85,16 @@ function addToLS(productName,proteins){
     
 }
 
+// Adding a new column to the DOM
+function addCol(){
+
+}
 
 
 // Adding a row to the DOM
 function addRow(...cellContent){
 
-    const rowCells = 3; // How much cells in a row we need
+    let rowCells = 3; // How much cells in a row we need
     const table = document.getElementById('product-table');
 
     // Convert cell content to array
@@ -119,22 +125,23 @@ function addRow(...cellContent){
     row.classList.add('table-row');
 
     // New cells
-    for(let i = 1; i < rowCells+1; i++){
+    for(let i = 0; i < rowCells; i++){
         const cell = document.createElement('td');
+        console.log(i);
 
         // Add classes
-        cell.classList.add(`col-${i}`);
+        cell.classList.add(`col-${i+1}`);
         cell.classList.add(`row-${tableRows}`);
 
         // Add content
-        const content = cellContent[i-1];
+        const content = cellContent[i];
         cell.innerText = content;
 
         // Insert in a row
         row.appendChild(cell);
     }
 
-    // Delete button
+    // Adding Delete button
     const delBtnCell = document.createElement('td');
     const delBtn = document.createElement('button');
 
@@ -149,7 +156,7 @@ function addRow(...cellContent){
 
 
 
-    // Insert all rest elements
+    // Insert all the rest elements
     delBtnCell.appendChild(delBtn);
     row.appendChild(delBtnCell);
 
@@ -160,6 +167,29 @@ function addRow(...cellContent){
 
     // Insert created HTML of the row
    // document.getElementById('product-table').insertAdjacentHTML('beforeend', newRow);
+
+}
+
+// Add header row
+function addHeader(){
+
+    let rowCells = 3; // How much cells in a row we need
+
+    const table = document.getElementById('product-table2');
+    const row = document.createElement('tr');
+
+    row.id = "table-header2";
+
+    // New cells
+    for(let i = 0; i < rowCells; i++){
+        const cell = document.createElement('th');
+
+        // Add classes
+        cell.classList.add(`col-${i+1}`);
+
+        // Insert in a row
+        row.appendChild(cell);
+    }
 
 }
 
@@ -193,6 +223,15 @@ function deleteRowsAll(){
 // Draw all table using data from the LS
 function drawTable(){
 
+    // Columns LS
+    // Check if our array exist in LS
+    // If LS is empty
+    if (localStorage.getItem('columns') === null){
+        // Create header
+    }else{
+        // Draw header
+    }
+
     // Check if our array exist in LS
     // If LS is empty
     if (localStorage.getItem('products') === null){
@@ -206,6 +245,9 @@ function drawTable(){
             addRow(product.id,product.name,product.proteins);
         });
     }
+
+
+    
 }
 
 
